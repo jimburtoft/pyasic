@@ -223,7 +223,10 @@ class BTMiner(BaseMiner):
             pass
 
         if pools is not None:
-            cfg = MinerConfig.from_api(pools)
+            try: 
+                cfg = MinerConfig.from_api(pools)
+            except KeyError:
+                cfg = MinerConfig()
         else:
             cfg = MinerConfig()
 

@@ -135,6 +135,8 @@ class Pool(MinerConfigValue):
 
     @classmethod
     def from_bosminer(cls, toml_pool_conf: dict) -> "Pool":
+        if "password" not in toml_pool_conf:
+            toml_pool_conf["password"] = ""
         return cls(
             url=toml_pool_conf["url"],
             user=toml_pool_conf["user"],
@@ -342,6 +344,7 @@ class PoolConfig(MinerConfigValue):
 
     @classmethod
     def from_api(cls, api_pools: dict) -> "PoolConfig":
+        
         pool_data = api_pools["POOLS"]
         pool_data = sorted(pool_data, key=lambda x: int(x["POOL"]))
 
